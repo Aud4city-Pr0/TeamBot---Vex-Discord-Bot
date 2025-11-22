@@ -1,0 +1,10 @@
+Goals for this project
+1. make a discord bot
+2. use the requests api to commmunicate with robotevents
+3. make the commands for the bot:
+   - !team - looks for vex teams based of their number and shows statistics about them (eg. 1234D)
+   - !event - looks for events based of their name or events in a season if one is provided
+   - !version - says the current version of the bot
+   - !skills - gets skills information about a team from a certain season
+   - !awards - gets award information about a team from a certian season
+   - !help - shows the commands on how to use the bot
