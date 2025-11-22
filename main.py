@@ -40,7 +40,16 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    await member.send(BOT_GREATING[random.randint(0, len(BOT_GREATING))])
+    # prints out greeting
+    print(BOT_GREATING[random.randint(0, len(BOT_GREATING))])
+    current_channel = member.guild.system_channel
+
+    # checking to see if it is real
+    if current_channel is not None:
+        if current_channel.permissions_for(member.guild.me).send_messages:
+            await current_channel.send(BOT_GREATING[random.randint(0, len(BOT_GREATING))])
+        else:
+            await member.send(BOT_GREATING[random.randint(0, len(BOT_GREATING))])
 
 # command handeling
 @bot.command()
@@ -60,7 +69,7 @@ async def version(ctx):
 
 @bot.command()
 async def team(ctx, team_name):
-     await ctx.send(f"Placeholder text: {team_name}")
+    await ctx.send(f"Placeholder text: {team_name}")
 
 # running the bot
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
