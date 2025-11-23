@@ -1,0 +1,79 @@
+# the request handler script
+
+# script imports
+import requests
+import json
+from dotenv import load_dotenv
+import os
+from enum import Enum
+
+# loading enviroment vars
+load_dotenv()
+API_TOKEN = os.getenv('ROBOT_EVENTS_API_TOKEN')
+
+# base url
+BASE_URL = "https://www.robotevents.com/api/v2"
+
+# endpoint Enum class
+class EndpointType(Enum):
+    ENDPOINT_TEAMS = "/teams"
+    ENDPOINT_EVENTS = "/events"
+
+# the request headers
+HEADERS = {
+    "accept": "application/json",
+    "Authorization": f'Bearer {API_TOKEN}',
+    "User-Agent": 'team-bot/1.0 (zachary.duriancik@gmail.com)'
+}
+
+# the request params
+TEAM_PARAMS = {
+    "program[]": [1],
+    "region": "Virgina",
+    "registered": True,
+    "number[]": []
+}
+
+EVENT_PARAMS = {
+    "program[]": [1],
+    "season[]": [180]
+}
+
+# test request function
+#TODO: make function useable by bot after testing is complete
+
+# getting response from api
+def get_rb_events_data(endpointType, params=None):
+
+    url = f'{BASE_URL}{endpointType}'
+
+    # actually getting a response
+    try:
+        reponse = requests.get(url, headers=HEADERS, params=params)
+
+        # Raise an expectation for bad status codes (4xx or 5xx)
+        reponse.raise_for_status()
+
+        print(f"Satus Code {reponse.status_code}")
+        return reponse.json()
+    except requests.exceptions.RequestException as e:
+        print(f"An Error occured")
+        return None
+
+
+def get_team_from_number(team_number):
+    # setting the number param
+    TEAM_PARAMS["number[]"] = [team_number]
+    #checking to see if all of the params are not empty
+    for para in TEAM_PARAMS.keys():
+        print(para)
+
+    
+
+
+# example of usage
+#event_data = get_rb_events_data(EndpointType.ENDPOINT_EVENTS.value, EVENT_PARAMS)
+get_team_from_number("4303D")
+
+#if event_data:
+    #print(json.dumps(event_data, indent=4))
