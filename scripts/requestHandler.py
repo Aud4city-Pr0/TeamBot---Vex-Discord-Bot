@@ -61,6 +61,7 @@ def get_rb_events_data(endpointType, params=None):
         return None
 
 
+# moudle functions
 def get_team_from_number(team_number):
     # setting the number param
     TEAM_PARAMS["number[]"] = [team_number]
@@ -73,9 +74,8 @@ def get_team_from_number(team_number):
     
     team_data = get_rb_events_data(EndpointType.ENDPOINT_TEAMS.value, TEAM_PARAMS)
     if team_data:
-        parsed_data = json.dumps(team_data, indent=4)
-        print(parsed_data)
-        return parsed_data
+        print(json.dumps(team_data, indent=4))
+        return team_data
 
     
 
