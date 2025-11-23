@@ -74,6 +74,7 @@ def get_team_from_number(team_number):
     team_data = get_rb_events_data(EndpointType.ENDPOINT_TEAMS.value, TEAM_PARAMS)
     if team_data:
         parsed_data = json.dumps(team_data, indent=4)
+        print(parsed_data)
         return parsed_data
 
     
