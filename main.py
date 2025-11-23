@@ -76,11 +76,12 @@ async def version(ctx):
 async def team(ctx, team_name):
     data = requestHandler.get_team_from_number(team_name)
     #TODO: switch to discord's built-in markdown system (Embeds)
-    await ctx.send(
-        f"Team Name: {data['data'][0]['team_name']}\n"
-        f"Robot Number: {data['data'][0]['team_number']}\n"
-        f"Organization: {data['data'][0]['organization']}"
-    )
+    #checking to see if data is a dict
+    if type(data) is dict:
+        await ctx.send(f"""Team Name: {data["data"][0]['team_name']}
+                       \n Team Number: {data["data"][0]['number']}
+                       \n Robot Name: {data["data"][0]['robot_name']}
+                       \n Org: {data["data"][0]['organization']}""")
 
 # running the bot
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
