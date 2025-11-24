@@ -60,12 +60,12 @@ async def on_member_join(member):
 @bot.command()
 async def info(ctx):
     await ctx.send(f"""{ctx.author.mention}, you have requseted help about how to use me, here are my commands:
-                   \n !info - displays commands that are used with this bot
-                   \n !team - looks for vex teams based of their number and shows statistics about them (eg. 1234D)
-                   \n !event - looks for events based of their name or events in a season if one is provided
-                   \n !version - says the current version of the bot
-                   \n !skills - gets skills information about a team from a certain season
-                   \n !awards - gets award information about a team from a certian season""")
+                   \n 1. !info - displays commands that are used with this bot
+                   \n 2. !team - looks for vex teams based of their number and shows statistics about them (eg. 1234D)
+                   \n 3. !event - shows the current events that a team is enrolled in/attended for the current season
+                   \n 4. !version - says the current version of the bot
+                   \n 5. !skills - gets skills information about a team from a certain season
+                   \n 6. !awards - gets award information about a team from a certian season""")
 
 @bot.command()
 async def version(ctx):
@@ -77,9 +77,8 @@ async def team(ctx, team_name):
     data, record_info = requestHandler.get_team_from_number(team_name)
     #TODO: switch to discord's built-in markdown system (Embeds)
     #checking to see if data is a dict
-
     if data:
-        await ctx.send(f"Information for team: **{team_name}**")
+        await ctx.send(f"Current season stats for team: **{team_name}**")
 
     if type(data) is dict:
         await ctx.send(f"""
@@ -89,7 +88,7 @@ async def team(ctx, team_name):
                        \n- **Org**: {data["data"][0]['organization']}
                        \n- 🏆️ **Matches Won:** {record_info.get("wins")} 
                        \n- 😔 **Matches Lost:** {record_info.get("losses")}
-                       \n- 🤝 **Matches tided:** {record_info.get("ties")}""")
+                       \n- 🤝 **Matches Tided:** {record_info.get("ties")}""")
 
 #TODO: get page funtionality working first
 #@bot.command()
