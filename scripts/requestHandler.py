@@ -30,7 +30,6 @@ HEADERS = {
 # the request params
 TEAM_PARAMS = {
     "program[]": [1],
-    "region": "Virgina",
     "registered": True,
     "number[]": []
 }
