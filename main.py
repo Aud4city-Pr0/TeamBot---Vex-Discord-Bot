@@ -11,12 +11,12 @@ from dotenv import load_dotenv
 import os
 
 # bot modules
-from scripts import requestHandler
+from modules import requestHandler
 
 # random join messages
 import random
 
-BOT_GREATING = [
+BOT_GREETING = [
     "Hi there, welcome to the sever!",
     "Welcome to the server :D, have fun!",
     "Hello and welcome!",
@@ -44,17 +44,17 @@ async def on_ready():
 @bot.event
 async def on_member_join(member):
     # prints out greeting
-    print(BOT_GREATING[random.randint(0, len(BOT_GREATING))])
+    print(BOT_GREETING[random.randint(0, len(BOT_GREETING))])
     current_channel = member.guild.system_channel
 
     # checking to see if it is real
     if current_channel is not None:
         if current_channel.permissions_for(member.guild.me).send_messages:
             # sends to channel
-            await current_channel.send(BOT_GREATING[random.randint(0, len(BOT_GREATING))])
+            await current_channel.send(BOT_GREETING[random.randint(0, len(BOT_GREETING))])
         else:
             # sends to member if channel is not real
-            await member.send(BOT_GREATING[random.randint(0, len(BOT_GREATING))])
+            await member.send(BOT_GREETING[random.randint(0, len(BOT_GREETING))])
 
 # command handeling
 @bot.command()
