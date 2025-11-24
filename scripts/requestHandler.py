@@ -121,6 +121,7 @@ def get_match_record_from_team(team):
 
     #checking to see if we have ids
     if not season_id and team_id:
+        print(f"season id: {season_id} or team id: {team_id} does not exists or is not an active season or resiterd team.")
         return None
     
     # setting param info
@@ -132,6 +133,7 @@ def get_match_record_from_team(team):
 
     #checking to see if we have data
     if not ranking_data or "data" not in ranking_data:
+        print("no data found")
         return None
     
     # record vars
